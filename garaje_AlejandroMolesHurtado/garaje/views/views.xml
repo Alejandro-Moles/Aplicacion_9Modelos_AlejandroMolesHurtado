@@ -1,0 +1,653 @@
+<odoo>
+  <data>
+
+<!--VISTA DEL MODELO DE PERSONA-->
+
+    <record model="ir.ui.view" id="garaje.persona_list_view">
+      <field name="name">garaje.persona.view.tree</field>
+      <field name="model">garaje.persona</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="nombre"/>
+           <field name="fecha_nacimiento"/>
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="garaje.persona_search_view">
+      <field name="name">garaje.persona.view.search</field>
+      <field name="model">garaje.persona</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="nombre"/>
+          <group>
+            <filter name="group_by_nombre" string="nombre" context="{'gropup_by':'nombre'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="garaje.persona_form_view">
+      <field name="name">garaje.persona.view.form</field>
+      <field name="model">garaje.persona</field>
+      <field name="arch" type="xml">
+        <form string="Información persona">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Dni de la Persona <field name="name" placeholder="Dni"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="nombre" placeholder="nombre"/>
+                 <field name="fecha_nacimiento"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="garaje.persona_calendar_view">
+      <field name="name">garaje.persona.view.calendar</field>
+      <field name="model">garaje.persona</field>
+      <field name="arch" type="xml">
+        <calendar string="Fecha de nacimiento" date_start="fecha_nacimiento" color="nombre" mode="month">
+          <field name="name"/>
+          <field name="nombre"/>
+        </calendar>
+      </field>
+    </record>
+
+    <!-- Definición de menús-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="garaje.persona_action_window">
+      <field name="name">personas</field>
+      <field name="res_model">garaje.persona</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+<!--VISTA DEL MODELO DE FABRICANTE-->
+<record model="ir.ui.view" id="garaje.fabricante_list_view">
+      <field name="name">garaje.fabricante.view.tree</field>
+      <field name="model">garaje.fabricante</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="persona_id" />
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="garaje.fabricante_search_view">
+      <field name="name">garaje.fabricante.view.search</field>
+      <field name="model">garaje.fabricante</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="persona_id" />
+          <group>
+            <filter name="group_by_empresa" string="empresa" context="{'gropup_by':'empresa'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="garaje.fabricante_form_view">
+      <field name="name">garaje.fabricante.view.form</field>
+      <field name="model">garaje.fabricante</field>
+      <field name="arch" type="xml">
+        <form string="Información fabricante">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Codigo del fabricante <field name="name" placeholder="Codigo Fabricante"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="empresa" placeholder="Empresa a la que pertenece"/>
+
+                <field name="persona_id" />
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+
+<!--VISTA DEL MODELO DEL COCHE-->
+<record model="ir.ui.view" id="garaje.coche_list_view">
+      <field name="name">garaje.coche.view.tree</field>
+      <field name="model">garaje.coche</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="modelo"/>
+          <field name="fabricante_id" />
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="garaje.coche_search_view">
+      <field name="name">garaje.coche.view.search</field>
+      <field name="model">garaje.coche</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="modelo"/>
+          <field name="fabricante_id" />
+          <group>
+            <filter name="group_by_modelo" string="modelo" context="{'gropup_by':'modelo'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+    <record model="ir.ui.view" id="garaje.coche_form_view">
+      <field name="name">garaje.coche.view.form</field>
+      <field name="model">garaje.coche</field>
+      <field name="arch" type="xml">
+        <form string="Información coche">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Identificador del coche <field name="name" placeholder="Id"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="modelo" placeholder="modelo"/>
+          <field name="fabricante_id" />
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+<!--VISTA DEL MODELO DE CLIENTE-->
+
+<record model="ir.ui.view" id="garaje.cliente_list_view">
+      <field name="name">garaje.cliente.view.tree</field>
+      <field name="model">garaje.cliente</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="plaza"/>
+          <field name="cliente_id" />
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="garaje.cliente_search_view">
+      <field name="name">garaje.cliente.view.search</field>
+      <field name="model">garaje.cliente</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="plaza"/>
+          <field name="cliente_id" />
+          <group>
+            <filter name="group_by_plaza" string="plaza" context="{'gropup_by':'plaza'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="garaje.cliente_form_view">
+      <field name="name">garaje.cliente.view.form</field>
+      <field name="model">garaje.cliente</field>
+      <field name="arch" type="xml">
+        <form string="Información cliente">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Id <field name="name" placeholder="Id cliente"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+              <separator string="Datos"/>
+              <field name="plaza" placeholder="Plaza del coche"/>
+              <field name="cliente_id" /> 
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+
+<!--VISTA DEL MODELO DE FACTURAS-->
+
+<record model="ir.ui.view" id="garaje.factura_list_view">
+      <field name="name">garaje.factura.view.tree</field>
+      <field name="model">garaje.factura</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="costo_fac"/>
+          <field name="tipo_fac" />
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="garaje.factura_search_view">
+      <field name="name">garaje.factura.view.search</field>
+      <field name="model">garaje.factura</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="costo_fac"/>
+          <field name="tipo_fac" />
+          <group>
+            <filter name="group_by_costo_fac" string="costo_fac" context="{'gropup_by':'costo_fac'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="garaje.factura_form_view">
+      <field name="name">garaje.factura.view.form</field>
+      <field name="model">garaje.factura</field>
+      <field name="arch" type="xml">
+        <form string="Información factura">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Id de la Factura <field name="name" placeholder="Id de la factura"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="costo_fac" placeholder="costo_fac"/>
+
+                <field name="tipo_fac" />
+
+    
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+
+  <!--VISTA DEL MODELO DE LINEAS DE FACTURAS-->
+  <record model="ir.ui.view" id="garaje.lin_fac_list_view">
+      <field name="name">garaje.lin_fac.view.tree</field>
+      <field name="model">garaje.lin_fac</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="factura_id"/>
+          <field name="cliente_id"/>
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="garaje.lin_fac_search_view">
+      <field name="name">garaje.lin_fac.view.search</field>
+      <field name="model">garaje.lin_fac</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="factura_id"/>
+          <field name="cliente_id"/>
+          <group>
+            <filter name="group_by_factura_id" string="factura_id" context="{'gropup_by':'factura_id'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="garaje.lin_fac_form_view">
+      <field name="name">garaje.lin_fac.view.form</field>
+      <field name="model">garaje.lin_fac</field>
+      <field name="arch" type="xml">
+        <form string="Información lin_fac">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+              Id factura <field name="name" placeholder="factura_id"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="name" placeholder="name"/>
+
+                  <field name="factura_id"/>
+                  <field name="cliente_id"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+
+<!--VISTA DEL MODELO DE EMPLEADOS-->
+ 
+    <record model="ir.ui.view" id="garaje.empleado_list_view">
+      <field name="name">garaje.empleado.view.tree</field>
+      <field name="model">garaje.empleado</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="empleado_id"/>
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="garaje.empleado_search_view">
+      <field name="name">garaje.empleado.view.search</field>
+      <field name="model">garaje.empleado</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="empleado_id"/>
+          
+          <group>
+            <filter name="group_by_empleado_id" string="empleado_id" context="{'gropup_by':'empleado_id'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="garaje.empleado_form_view">
+      <field name="name">garaje.empleado.view.form</field>
+      <field name="model">garaje.empleado</field>
+      <field name="arch" type="xml">
+        <form string="Información empleado">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Id empleado <field name="name" placeholder="name"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="empleado_id" placeholder="empleado_id"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+
+<!--VISTA DEL MODELO DE TRABAJO-->
+ 
+    <record model="ir.ui.view" id="garaje.trabajo_list_view">
+      <field name="name">garaje.trabajo.view.tree</field>
+      <field name="model">garaje.trabajo</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="sueldo"/>
+          <field name="empleado" />
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="garaje.trabajo_search_view">
+      <field name="name">garaje.trabajo.view.search</field>
+      <field name="model">garaje.trabajo</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="sueldo"/>
+          <field name="empleado" />
+          <group>
+            <filter name="group_by_sueldo" string="sueldo" context="{'gropup_by':'sueldo'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="garaje.trabajo_form_view">
+      <field name="name">garaje.trabajo.view.form</field>
+      <field name="model">garaje.trabajo</field>
+      <field name="arch" type="xml">
+        <form string="Información trabajo">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Trabajo <field name="name" placeholder="Nombre Trabajo"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="sueldo" placeholder="sueldo"/>
+                <field name="empleado" placeholder="Empleado"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+
+
+<!--VISTA DEL MODELO DE HERRAMIENTAS-->
+ 
+    <record model="ir.ui.view" id="garaje.herramientas_list_view">
+      <field name="name">garaje.herramientas.view.tree</field>
+      <field name="model">garaje.herramientas</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="cantidad"/>
+          <field name="empleado_asignado" />
+        </tree>
+      </field>
+    </record>
+
+<!-- search -->
+
+    <record model="ir.ui.view" id="garaje.herramientas_search_view">
+      <field name="name">garaje.herramientas.view.search</field>
+      <field name="model">garaje.herramientas</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="cantidad"/>
+          <field name="empleado_asignado" />
+          
+          <group>
+            <filter name="group_by_nombre" string="nombre" context="{'gropup_by':'nombre'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+    <!-- form -->
+
+    <record model="ir.ui.view" id="garaje.herramientas_form_view">
+      <field name="name">garaje.herramientas.view.form</field>
+      <field name="model">garaje.herramientas</field>
+      <field name="arch" type="xml">
+        <form string="Información herramientas">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                Codigo de la herramienta<field name="name" placeholder="name"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="cantidad" placeholder="cantidad"/>
+                <field name="empleado_asignado" />
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+
+   <!-- Definición de menús-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="garaje.fabricante_action_window">
+      <field name="name">fabricantes</field>
+      <field name="res_model">garaje.fabricante</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="garaje.coche_action_window">
+      <field name="name">coches</field>
+      <field name="res_model">garaje.coche</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="garaje.persona_action_window">
+      <field name="name">persona</field>
+      <field name="res_model">garaje.persona</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <record model="ir.actions.act_window" id="garaje.cliente_action_window">
+      <field name="name">cliente</field>
+      <field name="res_model">garaje.cliente</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="garaje.factura_action_window">
+      <field name="name">factura</field>
+      <field name="res_model">garaje.factura</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="garaje.lin_fac_action_window">
+      <field name="name">lin_facs</field>
+      <field name="res_model">garaje.lin_fac</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <record model="ir.actions.act_window" id="garaje.empleado_action_window">
+      <field name="name">empleado</field>
+      <field name="res_model">garaje.empleado</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="garaje.trabajo_action_window">
+      <field name="name">trabajo</field>
+      <field name="res_model">garaje.trabajo</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <record model="ir.actions.act_window" id="garaje.herramientas_action_window">
+      <field name="name">herramientas</field>
+      <field name="res_model">garaje.herramientas</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    
+    <!--                 -->
+
+    <menuitem name="garaje" id="garaje.menu_root"/>
+
+      <menuitem name="coches" id="garaje.menu_coche" parent="garaje.menu_root"/>
+      <menuitem name="fabricantees" id="garaje.menu_fabricante" parent="garaje.menu_root"/>
+      <menuitem name="personas" id="garaje.menu_persona" parent="garaje.menu_root"/>
+      <menuitem name="cliente" id="garaje.menu_cliente" parent="garaje.menu_root"/>
+      <menuitem name="factura" id="garaje.menu_factura" parent="garaje.menu_root"/>
+      <menuitem name="lin_fac" id="garaje.menu_lin_fac" parent="garaje.menu_root"/>
+      <menuitem name="empleado" id="garaje.menu_empleado" parent="garaje.menu_root"/>
+      <menuitem name="trabajo" id="garaje.menu_trabajo" parent="garaje.menu_root"/>
+      <menuitem name="herramientas" id="garaje.menu_herramientas" parent="garaje.menu_root"/>
+
+      <menuitem name="List" id="garaje.menu_coche_list" parent="garaje.menu_coche"
+              action="garaje.coche_action_window"/>
+      <menuitem name="List" id="garaje.menu_fabricante_list" parent="garaje.menu_fabricante"
+              action="garaje.fabricante_action_window"/>
+      <menuitem name="List" id="garaje.menu_persona_list" parent="garaje.menu_persona"
+              action="garaje.persona_action_window"/>
+      <menuitem name="List" id="garaje.menu_cliente_list" parent="garaje.menu_cliente"
+              action="garaje.cliente_action_window"/>
+      <menuitem name="List" id="garaje.menu_factura_list" parent="garaje.menu_factura"
+              action="garaje.factura_action_window"/> 
+       <menuitem name="List" id="garaje.menu_lin_fac_list" parent="garaje.menu_lin_fac"
+              action="garaje.lin_fac_action_window"/>
+        <menuitem name="List" id="garaje.menu_empleado_list" parent="garaje.menu_empleado"
+              action="garaje.empleado_action_window"/>    
+        <menuitem name="List" id="garaje.menu_trabajo_list" parent="garaje.menu_trabajo"
+              action="garaje.trabajo_action_window"/>     
+        <menuitem name="List" id="garaje.menu_herramientas_list" parent="garaje.menu_herramientas"
+              action="garaje.herramientas_action_window"/>   
+
+
+  </data>
+</odoo>
